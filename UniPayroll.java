@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
  
 public class UniPayroll{
     
@@ -6,6 +8,10 @@ public class UniPayroll{
     
     static void Payroll(){
         // Payroll section goes here
+        
+        // Format to $0.00 with two decimal places + round UP
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.CEILING);
         
         Scanner empcred_user = new Scanner(System.in);
         Scanner jobtime = new Scanner(System.in);
@@ -31,15 +37,16 @@ public class UniPayroll{
                 System.out.println("Your Hourly Rate is: $" + MOsalP +"/hr \nYour current regular pay is $" + regularvalueP);
                 
                 //insurance time
-
-                    double grosspayPT = regularvalueP * insurance;
+                    
+                    double Pinsurancereduce = regularvalueP * insurance;
+                    double grosspayPT = regularvalueP - Pinsurancereduce;
                     System.out.println("Employee has 5% insurance cut, total gross pay is: $" + grosspayPT);
                     
                     System.out.println("\n\nGenerated PAYSLIP \n=======================\n\n");
                     System.out.println("EMPLOYEE ID: 5512356        EMPLOYEE NAME: " + ECread1);
                     System.out.println("DESIGNATION: IT Associate");
-                    System.out.println("Regular Pay: $" + regularvalueP);
-                    System.out.println("Net Salary Amount: $" + grosspayPT);
+                    System.out.println("Regular Pay: $" + df.format(regularvalueP));
+                    System.out.println("Net Salary Amount: $" + df.format(grosspayPT));
                     System.out.println("Prepared By: hrguy");
                 
                 
@@ -71,15 +78,16 @@ public class UniPayroll{
                     
                     
                     //insurance time
-
-                    double grosspayOTY = regularvalueFY + overtimevalue * insurance;
+                    double FYgrosspayadd = regularvalueFY + overtimevalue;
+                    double FYinsurancereduce = FYgrosspayadd * insurance;
+                    double grosspayOTY = FYgrosspayadd - FYinsurancereduce;
                     System.out.println("Employee has 5% insurance cut, total gross pay is: $" + grosspayOTY);
                     
                     System.out.println("\n\nGenerated PAYSLIP \n=======================\n\n");
                     System.out.println("EMPLOYEE ID: 5512356        EMPLOYEE NAME: " + ECread1);
                     System.out.println("DESIGNATION: IT Associate");
-                    System.out.println("Regular Pay: $" + regularvalueFY + "         Overtime Pay: $" + overtimevalue);
-                    System.out.println("Net Salary Amount: $" + grosspayOTY);
+                    System.out.println("Regular Pay: $" + df.format(regularvalueFY) + "         Overtime Pay: $" + df.format(overtimevalue));
+                    System.out.println("Net Salary Amount: $" + df.format(grosspayOTY));
                     System.out.println("Prepared By: hrguy");
                     
                     
@@ -93,15 +101,16 @@ public class UniPayroll{
                     //proceed
                     
                     //insurance time
-
-                    double grosspayOTN = regularvalueF * insurance;
+                    
+                    double Finsurancereduce = regularvalueF * insurance;
+                    double grosspayOTN = regularvalueF - Finsurancereduce;
                     System.out.println("Employee has 5% insurance cut, total gross pay is: $" + grosspayOTN);
                     
                     System.out.println("\n\nGenerated PAYSLIP \n=======================\n\n");
                     System.out.println("EMPLOYEE ID: 5512356        EMPLOYEE NAME: " + ECread1);
                     System.out.println("DESIGNATION: IT Associate");
-                    System.out.println("Regular Pay: $" + regularvalueF);
-                    System.out.println("Net Salary Amount: $" + grosspayOTN);
+                    System.out.println("Regular Pay: $" + df.format(regularvalueF));
+                    System.out.println("Net Salary Amount: $" + df.format(grosspayOTN));
                     System.out.println("Prepared By: hrguy");
                     
                     
